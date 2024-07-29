@@ -1,3 +1,5 @@
+import "@/app/globals.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +7,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="container w-4/5 m-auto">{children}</div>
+      </body>
     </html>
   );
 }
