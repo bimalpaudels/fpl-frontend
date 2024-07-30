@@ -17,7 +17,7 @@ export default function TopFiveTable({
   attribute,
 }: TopFiveTableProps) {
   return (
-    <div className="w-1/5">
+    <div className="w-64 m-3">
       <div className="font-bold text-sm">
         <p>{title}</p>
       </div>
