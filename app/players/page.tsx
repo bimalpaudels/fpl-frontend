@@ -1,7 +1,14 @@
 import PlayerTable from "@/app/components/ui/table";
 import { TableColumns } from "@/app/components/ui/table";
+import Breadcrumbs from "@/app/components/ui/crumbs";
+import { getPlayersData } from "./lib";
 
 export default async function Page() {
+  const dropdownOptions = [
+    { label: "Traditional", href: "/players" },
+    { label: "Advanced", href: "/players/advanced" }, // Adjust the href based on your actual route
+  ];
+
   const traditionalColumnData: TableColumns[] = [
     { title: "PLAYER", key: "web_name" },
     { title: "TEAM", key: "team" },
@@ -25,21 +32,12 @@ export default async function Page() {
 
   const data = await getPlayersData();
 
-  return <PlayerTable columns={traditionalColumnData} players={data} />;
+  return (
+    <>
+      <Breadcrumbs current="Players" dropdownOptions={dropdownOptions} />
+      <PlayerTable columns={traditionalColumnData} players={data} />
+    </>
+  );
 }
 
-export async function getPlayersData(
-  sort: string = "total_points",
-  dir: number = -1
-) {
-  const res = await fetch(
-    `http://localhost:8000/players?sort=${sort}&dir=${dir}`,
-    {
-      cache: "no-cache",
-    }
-  );
-  if (!res.ok) {
-    throw new Error("Data fetching failed");
-  }
-  return res.json();
-}
+export const dynamic = "force-dynamic";
