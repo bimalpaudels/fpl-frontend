@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Pagination from "@/app/components/ui/pagination";
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 type Player = {
   // first_name: string;
   web_name: string;
@@ -77,7 +79,7 @@ export default function PlayerTable({ columns, players }: PlayerTableProps) {
       limit: number = 50
     ) {
       const res = await fetch(
-        `http://localhost:8000/players?skip=${
+        `${BACKEND_URL}/players?skip=${
           currentPage * limit
         }&limit=${limit}&sort=${sortBy}&dir=${dir}`,
         {
